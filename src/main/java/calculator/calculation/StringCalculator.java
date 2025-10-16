@@ -19,7 +19,7 @@ public class StringCalculator {
     }
 
     private static List<Integer> getTerms(Expression expression) {
-        List<Integer> terms = NumberSplitter.splitAndParseNumbers(expression);
+        List<Integer> terms = NumberSplitter.splitAndParseNumbers(expression.getExpressionBody(), expression.getDelimiters());
         validateTerms(terms);
         return terms;
     }
