@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 public class CustomDelimiterExpression implements Expression {
 
-    private static final List<String> BASIC_DELIMITERS = List.of(",", ":");
     private final String expressionBody;
     private final String customDelimiter;
 

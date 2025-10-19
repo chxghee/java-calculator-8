@@ -4,7 +4,6 @@ import java.util.List;
 
 public class BasicExpression implements Expression {
 
-    private static final List<String> BASIC_DELIMITERS = List.of(",", ":");
     private final String expressionBody;
 
     public BasicExpression(String expression) {
