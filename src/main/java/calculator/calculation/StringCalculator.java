@@ -13,9 +13,8 @@ public class StringCalculator {
             return 0;
         }
         Expression expression = ExpressionFactory.create(inputString);
-        List<Integer> terms = getTerms(expression);
-        Adder adder = new Adder(terms);
-        return adder.sumTerms();
+        return getTerms(expression).stream()
+                .reduce(0, Integer::sum);
     }
 
     private static List<Integer> getTerms(Expression expression) {
@@ -24,7 +23,7 @@ public class StringCalculator {
         return terms;
     }
 
-    public static void validateTerms(List<Integer> terms) {
+    private static void validateTerms(List<Integer> terms) {
         boolean hasMinus = terms.stream()
                 .anyMatch(term -> term < 0);
         if (hasMinus) {
