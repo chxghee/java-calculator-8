@@ -8,22 +8,28 @@ import java.util.List;
 
 public class StringCalculator {
 
-    public static int add(String inputString) {
+    private final ExpressionFactory expressionFactory;
+
+    public StringCalculator(ExpressionFactory expressionFactory) {
+        this.expressionFactory = expressionFactory;
+    }
+
+    public int sum(String inputString) {
         if (inputString == null || inputString.isEmpty()) {
             return 0;
         }
-        Expression expression = ExpressionFactory.create(inputString);
+        Expression expression = expressionFactory.create(inputString);
         return getTerms(expression).stream()
                 .reduce(0, Integer::sum);
     }
 
-    private static List<Integer> getTerms(Expression expression) {
+    private List<Integer> getTerms(Expression expression) {
         List<Integer> terms = NumberSplitter.splitAndParseNumbers(expression.getExpressionBody(), expression.getDelimiters());
         validateTerms(terms);
         return terms;
     }
 
-    private static void validateTerms(List<Integer> terms) {
+    private void validateTerms(List<Integer> terms) {
         boolean hasMinus = terms.stream()
                 .anyMatch(term -> term < 0);
         if (hasMinus) {
